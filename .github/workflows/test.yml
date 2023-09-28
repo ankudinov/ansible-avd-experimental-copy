@@ -39,3 +39,6 @@ jobs:
       - name: display outputs
         run: |
           echo "${{ needs.generate-build-args.outputs.ansible_core_version }}"
+          echo "${{ github.repository }}"
+          echo "${{ github.repository_owner }}"
+          echo "${{ github.ref_name }}"
