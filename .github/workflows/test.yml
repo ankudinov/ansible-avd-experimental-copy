@@ -17,6 +17,7 @@ jobs:
 
     outputs:
       ansible_core_version: "${{ steps.find-ansible-core-version.outputs.ansible_core_version }}"
+      ansible_install_location: "${{ steps.find-ansible-core-version.outputs.ansible_install_location }}"
 
     steps:
 
