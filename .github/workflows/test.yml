@@ -1,0 +1,41 @@
+---
+name: build containers on every push to devel branch
+
+on:
+  push:
+    branches:
+      - devel
+  workflow_dispatch:
+    branches:
+      - devel
+
+jobs:
+
+  generate-build-args:
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      ansible_core_version: "${{ steps.find-ansible-core-version.outputs.ansible_core_version }}"
+
+    steps:
+
+      - name: Checkout code ✅
+        uses: actions/checkout@v3
+
+      - name: find ansible-core version
+        id: find-ansible-core-version
+        run: |
+          ANSIBLE_CORE_VERSION=$(cat ansible_collections/arista/avd/requirements-dev.txt| grep ansible-core)
+          echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
+
+  display-outputs:
+
+    needs: [generate-build-args]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: display outputs
+        run: |
+          echo "${{ needs.generate-build-args.outputs.ansible_core_version }}"
