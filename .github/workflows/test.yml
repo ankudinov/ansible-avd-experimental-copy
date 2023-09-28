@@ -29,6 +29,12 @@ jobs:
           ANSIBLE_CORE_VERSION=$(cat ansible_collections/arista/avd/requirements-dev.txt| grep ansible-core)
           echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
 
+      - name: find ansible install location
+        id: find-ansible-install-location
+        run: |
+          ANSIBLE_INSTALL_LOCATION="git+https://github.com/${{ github.repository }}.git#/ansible_collections/arista/avd/,${{ github.ref_name }}"
+          echo "ansible_install_location=$ANSIBLE_INSTALL_LOCATION" >> $GITHUB_OUTPUT
+
   display-outputs:
 
     needs: [generate-build-args]
@@ -42,3 +48,4 @@ jobs:
           echo "${{ github.repository }}"
           echo "${{ github.repository_owner }}"
           echo "${{ github.ref_name }}"
+          echo "${{ needs.generate-build-args.outputs.ansible_install_location }}"
