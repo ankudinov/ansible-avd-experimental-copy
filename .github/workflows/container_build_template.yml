@@ -114,11 +114,17 @@ jobs:
             exit 1
           fi
 
-      # - name: find ansible-core version 🔥
-      #   id: find-ansible-core-version
-      #   run: |
-      #     ANSIBLE_CORE_VERSION=$(cat requirements-dev.txt| grep ansible-core)
-      #     echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
+      - name: find ansible-core version 🔥
+        id: find-ansible-core-version
+        run: |
+          ANSIBLE_CORE_VERSION=$(cat requirements-dev.txt| grep ansible-core)
+          echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: find ansible install location
+        id: find-ansible-install-location
+        run: |
+          ANSIBLE_INSTALL_LOCATION="git+https://github.com/${{ github.repository }}.git#/ansible_collections/arista/avd/,${{ github.ref_name }}"
+          echo "ansible_install_location=$ANSIBLE_INSTALL_LOCATION" >> $GITHUB_OUTPUT
 
       # - name: Copy shared files 📁
       #   if: steps.devcontainer-filter.outputs.workflows == 'true'
@@ -148,8 +154,8 @@ jobs:
         env:
           FROM_IMAGE: ${{ steps.generate-from-parameters.outputs.from_image }}
           FROM_VARIANT: ${{ steps.generate-from-parameters.outputs.from_variant }}
-          # AVD_VERSION: ${{ inputs.avd_version }}
-          # ANSIBLE_CORE_VERSION: ${{ steps.find-ansible-core-version.outputs.ansible_core_version }}
+          ANSIBLE_INSTALL_LOCATION: ${{ steps.find-ansible-core-version.outputs.ansible_install_location }}
+          ANSIBLE_CORE_VERSION: ${{ steps.find-ansible-core-version.outputs.ansible_core_version }}
           USERNAME: ${{ inputs.username }}
           UID: ${{ inputs.user_id }}
           GID: ${{ inputs.group_id }}
