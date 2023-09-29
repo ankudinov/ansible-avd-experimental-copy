@@ -61,7 +61,7 @@ jobs:
         python_version: ["3.9", "3.10", "3.11"]
         include:
           - python_version: "3.11"
-            container_tags: devel
+            container_tags: latest
 
     with:
       container_name: ${{ matrix.container_name }}
