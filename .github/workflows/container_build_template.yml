@@ -154,7 +154,7 @@ jobs:
         env:
           FROM_IMAGE: ${{ steps.generate-from-parameters.outputs.from_image }}
           FROM_VARIANT: ${{ steps.generate-from-parameters.outputs.from_variant }}
-          ANSIBLE_INSTALL_LOCATION: ${{ steps.find-ansible-core-version.outputs.ansible_install_location }}
+          ANSIBLE_INSTALL_LOCATION: ${{ steps.find-ansible-install-location.outputs.ansible_install_location }}
           ANSIBLE_CORE_VERSION: ${{ steps.find-ansible-core-version.outputs.ansible_core_version }}
           USERNAME: ${{ inputs.username }}
           UID: ${{ inputs.user_id }}
