@@ -50,3 +50,20 @@ jobs:
           echo "${{ github.repository_owner }}"
           echo "${{ github.ref_name }}"
           echo "${{ needs.generate-build-args.outputs.ansible_install_location }}"
+
+  build_base:
+
+    uses: ./.github/workflows/container_build_template.yml
+
+    strategy:
+      matrix:
+        container_name: [base]
+        python_version: ["3.9", "3.10", "3.11"]
+        include:
+          - python_version: "3.11"
+            container_tags: devel
+
+    with:
+      container_name: ${{ matrix.container_name }}
+      python_version: ${{ matrix.python_version }}
+      container_tags: ${{ matrix.container_tags }}
