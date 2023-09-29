@@ -117,7 +117,7 @@ jobs:
       - name: find ansible-core version 🔥
         id: find-ansible-core-version
         run: |
-          ANSIBLE_CORE_VERSION=$(cat requirements-dev.txt| grep ansible-core)
+          ANSIBLE_CORE_VERSION=$(cat ansible_collections/arista/avd/requirements-dev.txt| grep ansible-core)
           echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
 
       - name: find ansible install location
