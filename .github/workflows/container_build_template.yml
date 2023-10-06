@@ -50,7 +50,7 @@ on:
       group_id:
         required: false
         type: string
-        default: 20
+        default: 1000
       python_version:
         required: true
         type: string
