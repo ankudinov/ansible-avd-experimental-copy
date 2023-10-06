@@ -46,7 +46,7 @@ on:
       user_id:
         required: false
         type: string
-        default: 501
+        default: 1000
       group_id:
         required: false
         type: string
