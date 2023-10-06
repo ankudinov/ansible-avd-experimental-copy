@@ -76,7 +76,7 @@ jobs:
 
     strategy:
       matrix:
-        container_name: [universal]
+        container_name: [universal, dev]
         python_version: ["3.9", "3.10", "3.11"]
         include:
           - python_version: "3.11"
