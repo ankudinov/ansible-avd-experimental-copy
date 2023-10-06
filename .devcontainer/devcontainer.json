@@ -1,4 +1,4 @@
 {
     "name": "AVD Development",
-    "image": "ghcr.io/ankudinov/ansible-avd-experimental-copy/universal:python3.11-avd-devel"
+    "image": "ghcr.io/ankudinov/ansible-avd-experimental-copy/dev:python3.11-avd-devel"
 }
