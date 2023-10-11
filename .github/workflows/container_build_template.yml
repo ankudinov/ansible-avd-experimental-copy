@@ -102,7 +102,7 @@ jobs:
         #    but that is not implemented currently
         run: |
           if [ "${{ inputs.from_image }}" == "python" ]; then
-            if [ "${{ inputs.container_name }}" == "base" ] || [ "${{ inputs.container_name }}" == "dev" ]; then
+            if [ "${{ inputs.container_name }}" == "base" ]; then
               echo "from_image=${{ inputs.from_image }}" >> $GITHUB_OUTPUT
               echo "from_variant=${{ inputs.python_version }}-slim-bullseye" >> $GITHUB_OUTPUT
             else
