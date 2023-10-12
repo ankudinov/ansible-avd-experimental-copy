@@ -1,6 +1,7 @@
 #!/bin/bash
 
 AVD_DEV_REQ_FILE="${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements-dev.txt"
+USERNAME=$(whoami)
 
 # install ansible if not yet installed and avd collection is locally mounted
 ansible --version ||  if [ -f $AVD_DEV_REQ_FILE ]; then

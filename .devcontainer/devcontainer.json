@@ -3,5 +3,7 @@
     "image": "ghcr.io/ankudinov/ansible-avd-experimental-copy/dev:python3.11-avd-devel",
     "mounts": [
         "source=${localWorkspaceFolder}/ansible_collections/arista/avd,target=/home/avd/.ansible/collections/ansible_collections/arista/avd,type=bind"
-    ]
+    ],
+    // run entrypoint script manually as it's ignored by dev container CLI otherwise
+    "postStartCommand": "/bin/entrypoint.sh"
 }
