@@ -58,7 +58,8 @@ jobs:
     strategy:
       matrix:
         container_name: [base]
-        python_version: ["3.9", "3.10", "3.11"]
+        # python_version: ["3.9", "3.10", "3.11"]
+        python_version: ["3.11"]
         include:
           - python_version: "3.11"
             container_tags: latest
@@ -77,7 +78,8 @@ jobs:
     strategy:
       matrix:
         container_name: [universal, dev]
-        python_version: ["3.9", "3.10", "3.11"]
+        # python_version: ["3.9", "3.10", "3.11"]
+        python_version: ["3.11"]
         include:
           - python_version: "3.11"
             container_tags: latest
