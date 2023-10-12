@@ -12,10 +12,10 @@
         }
     },
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "version": "latest",
-            "dockerDashComposeVersion": 2
-        },
+        // "ghcr.io/devcontainers/features/docker-in-docker:2": {
+        //     "version": "latest",
+        //     "dockerDashComposeVersion": 2
+        // },
         // add sshd to support gh cli codespace cp
         "ghcr.io/devcontainers/features/sshd:1": {
             "version": "latest"
