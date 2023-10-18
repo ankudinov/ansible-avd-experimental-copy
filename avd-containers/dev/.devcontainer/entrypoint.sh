@@ -13,6 +13,19 @@ ansible --version ||  if [ -f $AVD_DEV_REQ_FILE ]; then
   pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements-dev.txt
 fi
 
+# install ansible from any AVD git branch (or it's fork)
+# the ANSIBLE_INSTALL_LOCATION_FORMAT must be "git+https://github.com/${AVD_GITHUB_REPO}.git#/ansible_collections/arista/avd/,${AVD_BRANCH_NAME}"
+# AVD_GITHUB_REPO and AVD_BRANCH_NAME must be defined for ANSIBLE_INSTALL_LOCATION_FORMAT to be crafted successfully
+ansible --version ||  if [ -f ${AVD_GITHUB_REPO} ] and [ -f ${AVD_BRANCH_NAME} ]; then
+  ANSIBLE_CORE_VERSION=$(curl -s https://raw.githubusercontent.com/${AVD_GITHUB_REPO}/${AVD_BRANCH_NAME}/ansible_collections/arista/avd/requirements-dev.txt | grep ansible-core)
+  pip3 install "${ANSIBLE_CORE_VERSION}"
+  ansible-galaxy collection install git+https://github.com/${AVD_GITHUB_REPO}.git#/ansible_collections/arista/avd/,${AVD_BRANCH_NAME}
+  pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements.txt
+  pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements-dev.txt
+fi
+
+ansible --version ||  echo "ERROR: Failed to install Ansible and collections." >&2; exit 1
+
 # execute command from docker cli if any
 if [ ${@+True} ]; then
   exec "$@"
