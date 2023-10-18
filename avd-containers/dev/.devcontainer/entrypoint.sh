@@ -10,6 +10,7 @@ ansible --version ||  if [ -f $AVD_DEV_REQ_FILE ]; then
   pip3 install "${ANSIBLE_CORE_VERSION}"
   ansible-galaxy collection install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/collections.yml
   pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements.txt
+  pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements-dev.txt
 fi
 
 # execute command from docker cli if any
