@@ -1,9 +1,13 @@
 {
     "name": "AVD Development",
     "image": "ghcr.io/ankudinov/ansible-avd-experimental-copy/dev:python3.11-avd-devel",
-    "mounts": [
-        "source=${localWorkspaceFolder}/ansible_collections/arista/avd,target=/home/avd/.ansible/collections/ansible_collections/arista/avd,type=bind"
-    ],
+    // "mounts": [
+    //     "source=${localWorkspaceFolder}/ansible_collections/arista/avd,target=/home/avd/.ansible/collections/ansible_collections/arista/avd,type=bind"
+    // ],
+    "containerEnv": {
+        "AVD_GITHUB_REPO": "aristanetworks/ansible-avd",
+        "AVD_BRANCH_NAME": "devel"
+    },
     // run entrypoint script manually as it's ignored by dev container CLI otherwise
     // the dev entrypoint is used to install ansible collections and requirements, as they are not included with the dev version
     // true is required to exit "onCreateCommand" without entering ZSH
