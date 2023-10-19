@@ -24,7 +24,7 @@ ansible --version &> /dev/null ||  if ! [ -z "${AVD_GITHUB_REPO}" ] && ! [ -z "$
   pip3 install -r ${HOME}/.ansible/collections/ansible_collections/arista/avd/requirements-dev.txt
 fi
 
-ansible --version &> /dev/null ||  echo "ERROR: Failed to install Ansible and collections." >&2; exit 1
+ansible --version &> /dev/null ||  (echo "ERROR: Failed to install Ansible and collections." >&2; exit 1)
 
 # execute command from docker cli if any
 if [ ${@+True} ]; then
