@@ -141,7 +141,7 @@ jobs:
       - name: check if image is already present
         id: check-image-presence
         run: |
-          docker manifest inspect ghcr.io/ankudinov/ansible-avd-experimental-copy/base:python3.11 &> /dev/null; echo "not_present=$?" >> $GITHUB_OUTPUT
+          ( docker manifest inspect ghcr.io/${{ github.repository }}/${{ inputs.container_name }}:${{ steps.build-tags.outputs.image_tags }} &>/dev/null; echo "not_present=$?" >> $GITHUB_OUTPUT ) || true
       
       - name: setup QEMU for multi-arch builds 🏗️
         if: ${{ steps.check-image-presence.outputs.not_present == '1' }}
