@@ -2,7 +2,7 @@
 # this workflow file is the template 
 # that will be triggered by a parent workflow matrix
 
-name: container-build-template
+name: reusable container build workflow
 
 env:
   # BUILDX_NO_DEFAULT_ATTESTATIONS must be set to build only arm64 and amd64 images

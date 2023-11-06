@@ -1,5 +1,5 @@
 ---
-name: build containers on every push to devel branch
+name: build base container
 
 on:
   push:
