@@ -13,46 +13,6 @@ on:
 
 jobs:
 
-  generate-build-args:
-
-    runs-on: ubuntu-latest
-
-    outputs:
-      ansible_core_version: "${{ steps.find-ansible-core-version.outputs.ansible_core_version }}"
-      ansible_install_location: "${{ steps.find-ansible-install-location.outputs.ansible_install_location }}"
-
-    steps:
-
-      - name: Checkout code ✅
-        uses: actions/checkout@v3
-
-      - name: find ansible-core version
-        id: find-ansible-core-version
-        run: |
-          ANSIBLE_CORE_VERSION=$(cat ansible_collections/arista/avd/requirements-dev.txt| grep ansible-core)
-          echo "ansible_core_version=$ANSIBLE_CORE_VERSION" >> $GITHUB_OUTPUT
-
-      - name: find ansible install location
-        id: find-ansible-install-location
-        run: |
-          ANSIBLE_INSTALL_LOCATION="git+https://github.com/${{ github.repository }}.git#/ansible_collections/arista/avd/,${{ github.ref_name }}"
-          echo "ansible_install_location=$ANSIBLE_INSTALL_LOCATION" >> $GITHUB_OUTPUT
-
-  display-outputs:
-
-    needs: [generate-build-args]
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: display outputs
-        run: |
-          echo "${{ needs.generate-build-args.outputs.ansible_core_version }}"
-          echo "${{ github.repository }}"
-          echo "${{ github.repository_owner }}"
-          echo "${{ github.ref_name }}"
-          echo "${{ needs.generate-build-args.outputs.ansible_install_location }}"
-
   build_base:
 
     uses: ./.github/workflows/container_build_template.yml
