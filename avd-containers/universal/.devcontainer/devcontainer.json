@@ -31,16 +31,26 @@
                 "mhutchie.git-graph",
                 "eamodio.gitlens",
                 "donjayamanne.githistory",
+                "github.vscode-pull-request-github",
+                // python
+                "ms-python.python",
+                "donjayamanne.python-extension-pack",
+                "njpwerner.autodocstring",
+                "ms-python.vscode-pylance",
                 // spell checker
                 "streetsidesoftware.code-spell-checker",
                 // errors and highlighters
                 "mechatroner.rainbow-csv",
+                "oderwat.indent-rainbow",
                 // excalidraw
                 "pomdtr.excalidraw-editor",
                 // markdown
                 "yzhang.markdown-all-in-one",
                 "bierner.markdown-checkbox",
                 "DavidAnson.vscode-markdownlint",
+                // jinja
+                "samuelcolvin.jinjahtml",
+                "wholroyd.jinja",
                 // various tools
                 "tuxtina.json2yaml",
                 "vscode-icons-team.vscode-icons",
