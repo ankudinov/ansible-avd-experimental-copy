@@ -1,27 +1,29 @@
 ---
-name: build base container
+name: build universal container
 
 on:
   push:
     branches:
       - devel
     paths:
-    - avd-containers/base/**
+    - avd-containers/universal/**
     - .github/workflows/container_build_template.yml
-    - .github/workflows/container_base_matrix.yml
+    - .github/workflows/container_universal_template.yml
   workflow_dispatch:
     branches:
       - devel
+  release:
+    types: [published]
 
 jobs:
 
-  build_base:
+  build_universal_container:
 
     uses: ./.github/workflows/container_build_template.yml
 
     strategy:
       matrix:
-        container_name: [base]
+        container_name: [universal]
         python_version: ["3.9", "3.10", "3.11"]
         include:
           - python_version: "3.11"

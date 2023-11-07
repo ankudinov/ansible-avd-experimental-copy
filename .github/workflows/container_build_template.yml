@@ -139,12 +139,18 @@ jobs:
           echo "ansible_install_location=$ANSIBLE_INSTALL_LOCATION" >> $GITHUB_OUTPUT
 
       - name: check if image is already present
+        # this step will check if image was already pushed before to avoid re-writing
+        # also if it's not a base image, this step will verify presence of the corresponding base image
         id: check-image-presence
         run: |
           echo "not_present=0" >> $GITHUB_OUTPUT
           for tag in $(echo ${{ steps.build-tags.outputs.image_tags }} | sed "s/,/ /g")
           do
             ( docker manifest inspect ghcr.io/${{ github.repository }}/${{ inputs.container_name }}:${tag} &>/dev/null ) || echo "not_present=1" >> $GITHUB_OUTPUT
+          done
+          # check if base image is present
+          if [ "${{ inputs.container_name }}" != "base" ]; then
+            docker manifest inspect ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} &>/dev/null ) || echo "ERROR: ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} is not present!"; exit 1
           done
       
       - name: setup QEMU for multi-arch builds 🏗️
