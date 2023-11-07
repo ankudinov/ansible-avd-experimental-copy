@@ -150,7 +150,8 @@ jobs:
           done
           # check if base image is present
           if [ "${{ inputs.container_name }}" != "base" ]; then
-            docker manifest inspect ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} &>/dev/null || echo "ERROR: ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} is not present!"; exit 1
+            echo "Verifying if base image is present..."
+            docker manifest inspect ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} >/dev/null
           fi
       
       - name: setup QEMU for multi-arch builds 🏗️
