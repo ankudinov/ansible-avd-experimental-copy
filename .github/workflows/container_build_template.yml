@@ -138,21 +138,21 @@ jobs:
           ANSIBLE_INSTALL_LOCATION="git+https://github.com/${{ github.repository }}.git#/ansible_collections/arista/avd/,${{ github.ref_name }}"
           echo "ansible_install_location=$ANSIBLE_INSTALL_LOCATION" >> $GITHUB_OUTPUT
 
-      - name: check if image is already present
-        # this step will check if image was already pushed before to avoid re-writing
-        # also if it's not a base image, this step will verify presence of the corresponding base image
-        id: check-image-presence
-        run: |
-          echo "not_present=0" >> $GITHUB_OUTPUT
-          for tag in $(echo ${{ steps.build-tags.outputs.image_tags }} | sed "s/,/ /g")
-          do
-            ( docker manifest inspect ghcr.io/${{ github.repository }}/${{ inputs.container_name }}:${tag} &>/dev/null ) || echo "not_present=1" >> $GITHUB_OUTPUT
-          done
-          # check if base image is present
-          if [ "${{ inputs.container_name }}" != "base" ]; then
-            echo "Verifying if base image is present..."
-            docker manifest inspect ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} >/dev/null
-          fi
+      # - name: check if image is already present
+      #   # this step will check if image was already pushed before to avoid re-writing
+      #   # also if it's not a base image, this step will verify presence of the corresponding base image
+      #   id: check-image-presence
+      #   run: |
+      #     echo "not_present=0" >> $GITHUB_OUTPUT
+      #     for tag in $(echo ${{ steps.build-tags.outputs.image_tags }} | sed "s/,/ /g")
+      #     do
+      #       ( docker manifest inspect ghcr.io/${{ github.repository }}/${{ inputs.container_name }}:${tag} &>/dev/null ) || echo "not_present=1" >> $GITHUB_OUTPUT
+      #     done
+      #     # check if base image is present
+      #     if [ "${{ inputs.container_name }}" != "base" ]; then
+      #       echo "Verifying if base image is present..."
+      #       docker manifest inspect ghcr.io/${{ github.repository }}/base:python${{ inputs.python_version }} >/dev/null
+      #     fi
       
       - name: setup QEMU for multi-arch builds 🏗️
         if: ${{ steps.check-image-presence.outputs.not_present == '1' }}
