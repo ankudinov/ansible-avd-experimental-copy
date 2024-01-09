@@ -1,7 +1,7 @@
 {
     "name": "AVD Development",
     "mounts": [
-        "source=/workspaces/ansible-avd-experimental-copy/ansible_collections/arista/avd,target=/home/avd/.ansible/collections/ansible_collections/arista/avd,type=bind"
+        "source=${localWorkspaceFolder}/ansible-avd-experimental-copy/ansible_collections/arista/avd,target=/home/avd/.ansible/collections/ansible_collections/arista/avd,type=bind"
     ],
     "image": "ghcr.io/aristanetworks/ansible-avd/dev:python3.11",
     // The AVD collection can also be installed from any git branch.
